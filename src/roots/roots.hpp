@@ -16,7 +16,7 @@ bool bisection(std::function<double(double)> f,double a, double b, double *root)
     while(true) {
         c = (a + b)/2;
         result = f(c);
-        if (fabs(result) < tolerance) {
+        if (std::abs(result) < tolerance) {
             *root = c;
             return true;
         }
@@ -46,7 +46,7 @@ bool regula_falsi(std::function<double(double)> f, double a, double b, double *r
     while(true) {
         c = a - (f(a) * (b - a)) / (f(b) - f(a));
         result = f(c);
-        if (fabs(result) < tolerance) {
+        if (std::abs(result) < tolerance) {
             *root = c;
             return true;
         }
@@ -72,7 +72,7 @@ bool newton_raphson(std::function<double(double)> f, std::function<double(double
     double tolerance = 1e-6;
     while (true) {
         result = c - f(c) / g(c);
-        if (fabs(c - result) < tolerance){
+        if (std::abs(c - result) < tolerance){
             *root = result;
             return true;
         }
@@ -96,7 +96,7 @@ bool secant(std::function<double(double)> f,
     double d = c + tolerance;
     while (true) {
         result = d - f(d) * (d - c) / (f(d) - f(c));
-        if (fabs(result - d) < tolerance) {
+        if (std::abs(result - d) < tolerance) {
             *root = result;
             return true;
         }
